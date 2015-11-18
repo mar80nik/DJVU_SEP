@@ -8,9 +8,7 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "outputwnd.h"
 #include "mylistbox.h"
-#include "bwfilter.h"
 #include "mylistctrl.h"
 #include "mylistbox.h"
 #include "afxwin.h"
@@ -25,8 +23,6 @@ class CTestWMFDlg : public CDialog
 	int ThreadsPID;
 // Construction
 public:
-	void ApplyFilter1(DjvuPic*);
-	CArray<DjvuPic*,DjvuPic*> Pics;
 	CString SaveListFile;
 	CTestWMFDlg(CWnd* pParent = NULL);	// standard constructor	
 	ThreadsArray Threads;

@@ -33,6 +33,9 @@ CString MyTimer::GetStringF(double dim)
 CString ConvTimeToStr(double time)
 {
 	int hour,min,sec,msec; double t;
+	CString T, Out;
+
+	if(time<0) {Out="???"; return Out;}
 
 	modf(time/3600., &t); 
 	time=fmod(time,3600.); 
@@ -42,8 +45,7 @@ CString ConvTimeToStr(double time)
 	min=(int)t;
 	msec=(int)(1e3*modf(time,&t)); 
 	sec=(int)t;
-		
-	CString T, Out;
+	
 	if(hour) {T.Format("%d h ",hour); Out+=T;}
 	if(min)	{T.Format("%d m ",min); Out+=T;}
 	if(sec) {T.Format("%d s ",sec); Out+=T;}	

@@ -4,21 +4,15 @@
 #include "stdafx.h"
 #include "testWMF.h"
 #include "testWMFDlg.h"
-#include "deskewfilter.h"
-#include "niblackfilter.h"
-#include "myprintdlg.h"
-#include "grayfilter.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
 static char THIS_FILE[] = __FILE__;
 #endif
-#include "gausianblur.h"
+
 #include "my_timer.h"
-#include "rotatefilter.h"
 #include ".\testwmfdlg.h"
-#include "Psapi.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CAboutDlg dialog used for App About
@@ -255,11 +249,6 @@ int CTestWMFDlg::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 void CTestWMFDlg::PostNcDestroy() 
 {
-	for(int i=0;i<Pics.GetSize();i++)
-	{
-		delete Pics[i];	
-	}
-
 	for(int i=0;i<Threads.GetSize();i++)
 	{
 		Threads[i]->StopWaiting=true;
@@ -333,8 +322,6 @@ void CTestWMFDlg::OnSaveList()
 		{
 			{
 			CArchive ar(&f,CArchive::store);
-			int n=Pics.GetSize(); ar << n;
-			for(int i=0;i<n;i++) (Pics[i])->Serialize(ar);						
 			ret="SaveList OK"; 
 			}
 			f.Close();	

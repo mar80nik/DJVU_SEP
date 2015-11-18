@@ -5,7 +5,6 @@
 #include "testWMF.h"
 #include "MyListCtrl.h"
 #include "testwmfdlg.h"
-#include "rotatefilter.h"
 #include ".\mylistctrl.h"
 
 #ifdef _DEBUG
@@ -271,140 +270,6 @@ void MyListCtrl::OnContextMenu(CWnd* pWnd, CPoint point)
 	menu2->TrackPopupMenu(TPM_LEFTALIGN | TPM_LEFTBUTTON,point.x,point.y,pWnd);	
 }
 
-void GetCrop1(DjvuPicArray& Pics2,CSize& CropSize, CSize& MaxSize)
-{
-	CropSize.cx=CropSize.cy=MaxSize.cx=MaxSize.cy=0;
-	for(int i=0;i<Pics2.GetSize(); i++)
-	{
-		CropSize.cx+=Pics2[i]->PicDim.cx; if(Pics2[i]->PicDim.cx>MaxSize.cx) MaxSize.cx=Pics2[i]->PicDim.cx;
-		CropSize.cy+=Pics2[i]->PicDim.cy; if(Pics2[i]->PicDim.cy>MaxSize.cy) MaxSize.cy=Pics2[i]->PicDim.cy;        	
-	}
-}
-
-CString GetCrop2(DjvuPicArray& Pics2,CSize& CropSize, CSize& MaxSize)
-{
-	CPoint lt; int num=Pics2.GetSize(),n1=0;
-	for(int i=0;i<Pics2.GetSize(); i++)
-	{
-		DjvuPic &CurPic=*(Pics2[i]);
-		if(CurPic.PicDim.cx>CropSize.cx || CurPic.PicDim.cy>CropSize.cy) 
-		{
-			n1++;
-		}
-
-		CurPic.CropZone.enable=true; 
-		lt.x=(CurPic.PicDim.cx-CropSize.cx)/2; lt.y=(CurPic.PicDim.cy-CropSize.cy)/2;
-		CurPic.CropZone.Rect=CRect(lt,CropSize);
-
-//		else
-//		{
-//			CurPic.CropZone.enable=false;			
-//			CurPic.CropZone.Rect=CRect(CPoint(0,0),CurPic.PicDim);
-//		}
-	}
-	CString ret; ret.Format("CropSize=(%d:%d) [%d:%d] %d (%d%%)files",
-		CropSize.cx,CropSize.cy,CropSize.cx*254/300,CropSize.cy*254/300,n1,100*n1/num);
-	return ret;
-}
-/*
-void MyListCtrl::OnGetCropZone()
-{
-	/*
-	DjvuPicArray Pics2; int num=0,n1=0; CSize CropSize, MaxSize;
-	GetSelectedItems(Pics2);
-
-	GetCrop1(Pics2,CropSize,MaxSize);
-	CropSize.cx/=Pics2.GetSize(); CropSize.cy/=Pics2.GetSize();
-
-	Parent->InfoList.AddString(GetCrop2(Pics2,CropSize,MaxSize));
-	UpdateList();
-	
-}
-
-void MyListCtrl::OnGetCropMaxW()
-{
-	/*
-	DjvuPicArray Pics2; int num=0,n1=0; CSize CropSize, MaxSize;
-	GetSelectedItems(&Pics2);
-
-	GetCrop1(Pics2,CropSize,MaxSize);
-	CropSize.cx=MaxSize.cx; CropSize.cy/=Pics2.GetSize();
-
-	Parent->InfoList.AddString(GetCrop2(Pics2,CropSize,MaxSize));
-	UpateList();
-	
-}
-
-void MyListCtrl::OnGetCropMaxH()
-{
-	/*
-	DjvuPicArray Pics2; int num=0,n1=0; CSize CropSize, MaxSize;
-	GetSelectedItems(&Pics2);
-
-	GetCrop1(Pics2,CropSize,MaxSize);
-	CropSize.cx/=Pics2.GetSize(); CropSize.cy=MaxSize.cy;
-
-	Parent->InfoList.AddString(GetCrop2(Pics2,CropSize,MaxSize));
-	UpdateList();
-	
-}
-
-void MyListCtrl::OnGetCropMaxWH()
-{
-	/*
-	DjvuPicArray Pics2; int num=0,n1=0; CSize CropSize, MaxSize;
-	GetSelectedItems(&Pics2);
-
-	GetCrop1(Pics2,CropSize,MaxSize);
-	CropSize.cx=MaxSize.cx;; CropSize.cy=MaxSize.cy;
-
-	Parent->InfoList.AddString(GetCrop2(Pics2,CropSize,MaxSize));
-	UpdateList();
-	
-}
-
-
-void MyListCtrl::OnClearCropZone()
-{
-/*
-	DjvuPicArray Pics2; int num=0,n1=0; CSize CropSize;
-	GetSelectedItems(&Pics2);
-
-	CropSize.cx=CropSize.cy=0; num=Pics2.GetSize();
-	for(int i=0;i<num; i++)
-	{
-		DjvuPic &CurPic=*(Pics2[i]);
-		CurPic.CropZone.enable=false;			
-		CurPic.CropZone.Rect=CRect(CPoint(0,0),CurPic.PicDim);
-	}
-	UpdateList();
-	
-}
-
-void MyListCtrl::OnSaveNamesList()
-{
-
-	POSITION pos=GetFirstSelectedItemPosition(); CString Name, OutName;
-	Parent->UpdateData();
-	OutName=Parent->InputFldr;
-	if(OutName!="") OutName+="\\";
-	OutName+="SaveListFile.txt"; CStdioFile f;
-	if(f.Open(OutName,CFile::modeCreate | CFile::modeWrite))
-	{
-		DjvuPicArray Pics2; GetSelectedItems(&Pics2);
-		for(int i=0;i<Pics2.GetSize(); i++)
-		{
-			DjvuPic &CurPic=*(Pics2[i]);
-			Name=CurPic.Name+'\n';
-			f.WriteString(Name);
-		}
-		f.Close(); Name.Format("File %s was created",OutName);	
-	}
-	else Name.Format("File %s create ERROR",OutName);	
-	Parent->InfoList.AddString(Name);	
-	
-}
-*/
 
 void MyListCtrl::CreateColumns(void)
 {
@@ -413,12 +278,6 @@ void MyListCtrl::CreateColumns(void)
 	InsertColumn(i++,"Name",LVCFMT_LEFT ,370);
 	InsertColumn(i++,"Width",LVCFMT_CENTER ,40);
 	InsertColumn(i++,"Height",LVCFMT_CENTER ,60);
-//	InsertColumn(i++,"Zones",LVCFMT_CENTER ,20);
-//	InsertColumn(i++,"Smooth",LVCFMT_CENTER ,50);
-//	InsertColumn(i++,"Djvu",LVCFMT_CENTER ,50);
-//	InsertColumn(i++,"Bckg",LVCFMT_CENTER ,20);
-//	InsertColumn(i++,"Cr/W",LVCFMT_CENTER ,40);
-//	InsertColumn(i++,"Cr/H",LVCFMT_CENTER ,40);
 }
 
 FRGPic::FRGPic(CString name)

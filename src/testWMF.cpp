@@ -12,7 +12,6 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 GraphicThread *Graph;
-MessagesInspector Inspector1;
 
 /////////////////////////////////////////////////////////////////////////////
 // CTestWMFApp

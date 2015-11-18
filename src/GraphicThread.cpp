@@ -2,7 +2,6 @@
 #include ".\graphicthread.h"
 #include "resource.h"
 #include "testWMFDlg.h"
-#include "rotatefilter.h"
 
 IMPLEMENT_DYNCREATE(GraphicThread, MyThread)
 

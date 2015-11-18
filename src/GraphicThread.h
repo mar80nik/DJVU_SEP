@@ -1,7 +1,6 @@
 #pragma once
 #include "mythread\mythread.h"
-#include "outputwnd.h"
-#include "GausianBlur.h"
+#include "generic.h"
 
 enum GraphModes {NONE=0, FRG=1, BCKG=1<<1, BW=1<<2, BLUR=1<<3, ROTLINE=1<<4};
 
@@ -16,12 +15,6 @@ public:
 	{
 		m1=m2=m3=0; //obj=_obj;		
 	};	
-};
-
-struct PrintMsg
-{
-    CArray<DjvuPic*,DjvuPic*> *Pics1;
-
 };
 
 enum GraphicMessages

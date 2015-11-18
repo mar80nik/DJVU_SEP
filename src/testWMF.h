@@ -26,7 +26,6 @@
 #define GraphID 345
 extern CEvent Terminator1;
 extern GraphicThread *Graph;
-extern MessagesInspector Inspector1;	
 
 class CTestWMFApp : public CWinApp
 {

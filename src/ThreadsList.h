@@ -4,7 +4,6 @@
 #include "afxmt.h"
 #include "generic.h"
 #include "resource.h"
-#include "djvupic.h"
 #include "globalheader.h"
 #include "MyListCtrl.h"
 

@@ -3,7 +3,6 @@
 #include "graphicthread.h"
 #include "testWMFDlg.h"
 #include "Psapi.h"
-#include "rotatefilter.h"
 
 void GetRandomString(CString &T)
 {
