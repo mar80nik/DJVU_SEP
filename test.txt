@@ -1,0 +1,13 @@
+[01.tif]
+File name = 01.tif
+Directory = 
+Compression = Group 4 Fax Encoding
+Resolution = 300 x 300 DPI
+Image dimensions = 2480 x 3520  Pixels (8.73 MPixels) (1.42)
+Print size = 21.0 x 29.8 cm; 8.3 x 11.7 inches
+Color depth = 2   (1 BitsPerPixel)
+Number of unique colors = 2
+Disk size = 24.44 KB (25 022 Bytes)
+Current memory size = 1.05  MB (1 098 288 Bytes)
+File date/time = 25.06.2012 / 23:06:50
+
