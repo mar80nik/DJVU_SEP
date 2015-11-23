@@ -71,7 +71,7 @@ CTestWMFDlg::CTestWMFDlg(CWnd* pParent /*=NULL*/)
 	edge_level = 50;
 	canvasW = 1263;
 	canvasH = 1977;
-	DJVUOutFldr="g:\\!tmp\\";	
+	DJVUOutFldr="d:\\!tmp\\";	
 	//}}AFX_DATA_INIT
 	// Note that LoadIcon does not require a subsequent DestroyIcon in Win32
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
@@ -249,52 +249,9 @@ void CTestWMFDlg::PostNcDestroy()
 	
 	CDialog::PostNcDestroy();
 }
-/*
-void CTestWMFDlg::OnButton3() 
-{
-	for(int i=0;i<Pics.GetSize();i++)
-	{
-		Pics[i]->Destroy();
-		delete Pics[i];	
-	}
-	Pics.RemoveAll();
-	BKGFileList.UpdateList();
-	SaveListFile="";
-}
-*/
-/*
-void CTestWMFDlg::OnCommandNext()
-{
-	//CArray<DjvuPic*,DjvuPic*> &pics=*Pics;
-
-	int &n=BKGFileList.HitItem;
-	if(n>=0 && n<Pics.GetSize()-1) 
-	{
-		n++;			
-		BKGFileList.SendMessage(WM_LBUTTONDBLCLK,1234,0);
-	}
-
-	//return true;
-}
-*/
-/*
-void CTestWMFDlg::OnCommandPrev()
-{
-	int &n=BKGFileList.HitItem;
-	if(n>0) 
-	{
-		n--;		
-		BKGFileList.SendMessage(WM_LBUTTONDBLCLK,1234,0);
-	}
-	//return true;
-}
-*/
 
 void CTestWMFDlg::OnOK() 
 {
-	// TODO: Add extra validation here
-	
-//	CDialog::OnOK();
 }
 
 void CTestWMFDlg::OnSaveList() 
@@ -348,20 +305,7 @@ void CTestWMFDlg::OnEnKillfocusEdit5()
 {
 	UpdateData();
 }
-/*
-void CTestWMFDlg::OnBnClickedButton15()
-{
-	UpdateData();
-	FRGPicArray PicList;
-	BKGFileList.GetSelectedItems(PicList);
-	for(int i=0;i<PicList.GetSize();i++) 
-	{
-//		PicList[i]->GBparam.KernelSize=GBn;
-//		PicList[i]->GBparam.sigma=GBsigma;
-	}
-	BKGFileList.UpdateList();
-}
-*/
+
 LRESULT CTestWMFDlg::OnWaiting(WPARAM wParam, LPARAM lParam )
 {
 	CString T; T.Format("Waiting for files to rename");
@@ -396,18 +340,10 @@ LRESULT CTestWMFDlg::OnPrinterLock(WPARAM wParam, LPARAM lParam )
 
 void CTestWMFDlg::OnBnClickedButton4()
 {
-/*
-	UpdateData();
-	DjvuPicArray PicList;
-	BKGFileList.GetSelectedItems(&PicList);
-	for(int i=0;i<PicList.GetSize();i++) PicList[i]->CenterRotate.angle=angle;
-	BKGFileList.UpdateList();
-	*/
 }
 
 void CTestWMFDlg::OnSelectAll()
 {
-//	CString T; T="Select All"; InfoList.AddString(T);
 	FRGFileList.SelectAll();
 }
 
@@ -457,88 +393,6 @@ LRESULT CTestWMFDlg::OnThreadListUpdate(WPARAM wParam, LPARAM lParam )
 	return 0;
 }
 
-/*
-		if(msg->FLAGS & DONE_MSK) {Thrd->Done=msg->Done; t++;}
-		if(msg->FLAGS & TIME_MSK) {Thrd->Time=msg->Time; t++;}
-		if(msg->FLAGS & TIME_LEFT_MSK) {Thrd->TimeLeft=msg->TimeLeft; t++;}
-		if(msg->FLAGS & STATUS_MSK) {Thrd->Status=msg->Status; t++;}
-
-*/
-
-/*
-void CTestWMFDlg::OnBnClickedButton7()
-{
-	CString Name,TmpPBM,TmpRLE,TmpPPM,TmpSEP,T; 
-
-	Name=CString("p0005"); 
-	TmpPBM.Format("%s_PBM.pbm",Name); TmpRLE.Format("%_RLE.rle",Name);
-	TmpPPM.Format("%_PPM.ppm",Name); TmpSEP.Format("%_SEP.sep",Name);
-
-
-	T.Format("i_view32 %s.tif /convert=%s",Name,TmpPBM);
-	STARTUPINFO si;  GetStartupInfo(&si); PROCESS_INFORMATION pi1;	
-
-	if(CreateProcess(NULL, (char *)LPCSTR(T), NULL, NULL, FALSE, DETACHED_PROCESS | CREATE_SUSPENDED | IDLE_PRIORITY_CLASS, NULL, NULL, &si, &pi1)) 
-	{
-		ResumeThread(pi1.hThread);
-		WaitForSingleObject(pi1.hThread,INFINITE);
-	}
-
-	T.Format("i_view32 %s.jpg /convert=%s",Name,TmpPPM);
-	if(CreateProcess(NULL, (char *)LPCSTR(T), NULL, NULL, FALSE, DETACHED_PROCESS | CREATE_SUSPENDED | IDLE_PRIORITY_CLASS, NULL, NULL, &si, &pi1)) 
-	{
-		ResumeThread(pi1.hThread);
-		WaitForSingleObject(pi1.hThread,INFINITE);
-	}
-
-	T.Format("pnmtodjvurle.exe"); 
-	SECURITY_ATTRIBUTES sa;
-	sa.nLength=sizeof(SECURITY_ATTRIBUTES);
-	sa.lpSecurityDescriptor=NULL;
-	sa.bInheritHandle=TRUE;
-
-	HANDLE in=CreateFile(TmpPBM, GENERIC_READ, 0, &sa, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-	HANDLE out=CreateFile(TmpRLE, GENERIC_WRITE, 0, &sa, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
-
-	si.hStdInput=in;
-	si.hStdOutput=out;
-	si.dwFlags|=STARTF_USESTDHANDLES;
-
-	if(CreateProcess(NULL, (char *)LPCSTR(T), NULL, NULL, TRUE, 
-		DETACHED_PROCESS | CREATE_SUSPENDED | IDLE_PRIORITY_CLASS, NULL, NULL, &si, &pi1)) 
-	{
-		ResumeThread(pi1.hThread);
-		WaitForSingleObject(pi1.hThread,INFINITE);
-	}
-	CloseHandle(in); CloseHandle(out); DeleteFile(TmpPBM);
-
-
-	HANDLE sep=CreateFile(TmpSEP, GENERIC_WRITE, 0, &sa, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
-	HANDLE frg=CreateFile(TmpRLE, GENERIC_READ, 0, &sa, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-	HANDLE bkg=CreateFile(TmpPPM, GENERIC_READ, 0, &sa, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-
-	
-	int size; DWORD done; BYTE *arr=NULL;
-	size=GetFileSize(frg,0); arr=new BYTE[size];
-	ReadFile(frg,arr,size,&done,0);	WriteFile(sep,arr,size,&done,0);
-	delete[] arr;
-	SetEndOfFile(sep);
-	size=GetFileSize(bkg,0); arr=new BYTE[size];
-	ReadFile(bkg,arr,size,&done,0);	WriteFile(sep,arr,size,&done,0);
-	delete[] arr;
-	CloseHandle(sep); CloseHandle(frg); CloseHandle(bkg);
-	DeleteFile(TmpRLE); DeleteFile(TmpPPM);
-
-	GetStartupInfo(&si);
-	T.Format("csepdjvu %s %s.djvu",TmpSEP,Name);
-	if(CreateProcess(NULL, (char *)LPCSTR(T), NULL, NULL, FALSE, DETACHED_PROCESS | CREATE_SUSPENDED | IDLE_PRIORITY_CLASS, NULL, NULL, &si, &pi1)) 
-	{
-		ResumeThread(pi1.hThread);
-		WaitForSingleObject(pi1.hThread,INFINITE);
-	}
-	DeleteFile(TmpSEP);	
-}
-*/
 void CTestWMFDlg::OnBnClickedButton3()
 {
 	FRGFileList.Pics.RemoveAll();

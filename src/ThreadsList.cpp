@@ -3,6 +3,7 @@
 #include "graphicthread.h"
 #include "testWMFDlg.h"
 #include "Psapi.h"
+#include "atlimage.h"
 
 void GetRandomString(CString &T)
 {
@@ -133,9 +134,8 @@ void PrintThreadParams::Main()
 
 		FRGPic &CurPic=Pics1[j];
 		
-//		name.Format("%s%03d",RandomText,j+1); 
 		T=CurPic.Name; 
-//		T=name;
+
 		T.Replace(' ','_'); TmpName=*Path+T;		
 		TmpPPM=TmpName+".ppm"; 
 		TmpSEP=TmpName+".sep";TmpDJVU=TmpName+".djvu";
@@ -216,54 +216,6 @@ void PrintDialogThreadParams::Main()
 
 void RenameThreadParams::Main()
 {
-//	WIN32_FIND_DATA FindFileData; ; HANDLE FFF;	PicsN=Pics->GetSize(); 
-//	CString SearchPattern; StatMessage* msg; CString OldFile, NewFile;
-//	int Total; Total=Moved=Renamed=0;
-/*
-	Parent->PostThreadMessage(UM_WAITING,0,0);		
-//	SearchPattern.Format("%s\\%s*.djvu",*Path,RandomText);
-	do
-	{
-		if((FFF=FindFirstFile(LPCSTR(SearchPattern),&FindFileData))!=INVALID_HANDLE_VALUE) 
-		{	
-			do
-			{
-				CString Name=FindFileData.cFileName; int ArrayN;
-				Name=Name.Right(8); Name=Name.Left(3);
-				ArrayN=atoi(Name);
-				if(ArrayN>0 && ArrayN<=PicsN)
-				{
-					DjvuPic* CurPic=Pics->GetAt(--ArrayN);
-					OldFile.Format("%s\\%s",*Path,FindFileData.cFileName);					
-					NewFile=CurPic->Path+CurPic->Name+".djvu";
-					if(MoveFile(OldFile,NewFile)) Moved++;
-					else
-					{
-						NewFile.Format("%s\\%s.djvu",*Path,CurPic->Name);
-						MoveFile(OldFile,NewFile); Renamed++;
-					}				
-				}
-			}
-			while(FindNextFile(FFF,&FindFileData) && !StopWaiting);
-			if(Moved+Renamed!=Total)
-			{
-				Total=Moved+Renamed;
-				msg=new StatMessage();	Timer1.Stop(); msg->Time=Timer1.GetValue(); msg->Done=Moved;
-				msg->TimeLeft=msg->Time*PicsN/Total; msg->FLAGS=TIME_MSK | DONE_MSK | TIME_LEFT_MSK;
-				PostParentMessage(UM_UPDATE_THREAD_LIST,msg);	
-
-				Parent->PostThreadMessage(UM_UPDATE1,Total,PicsN);
-			}
-			Total=Moved+Renamed; 
-            
-			Limit1->Update(-1,Total);
-		}
-		else Sleep(100);		
-		FindClose(FFF);
-	}
-	while(!StopWaiting && Total<PicsN); 
-*/
-//	delete Pics; Pics=0;
 	Limit1->terminator.SetEvent();
 	Parent->PostThreadMessage(UM_PRINT,0,0);	
 }
@@ -326,17 +278,6 @@ void ThreadsList::UpdateList()
 		UpdateElement(i,i);
 	}
 
-	/*
-	LV_ITEM _ms_lvi;
-	_ms_lvi.mask=LVIF_STATE;
-	_ms_lvi.stateMask = LVIS_SELECTED | LVIS_FOCUSED;
-	_ms_lvi.state = LVIS_SELECTED | LVIS_FOCUSED;			
-
-	LV_ITEM FAR * temp=&_ms_lvi;
-
-	this->PostMessage(LVM_SETITEMSTATE ,(WPARAM)(i), (LPARAM)(temp));
-//	EnsureVisible(n, false);	
-*/
 	EnsureVisible(i-1, false);	
 }
 

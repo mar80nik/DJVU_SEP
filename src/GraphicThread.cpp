@@ -40,21 +40,6 @@ void GraphicThread::Main(WPARAM wParam, LPARAM lParam)
 {
 }
 
-//------------------------------------------------
-void GraphicThread::DrawShape(AbstractGraphics *shape,BMPanvas* dest,double zoom)
-{
-	if(!(shape->Draw(dest,zoom)))
-	{		
-		shape->zOrder=Shapes.Add(shape)+1;								
-		Eraser.Add(shape->Rgn);
-	}	
-}
-void GraphicThread::EraseShape(AbstractGraphics *shape,BMPanvas* dest,CRect rect)
-{	
-	shape->Erase(dest,rect); 
-	if(!shape->ActiveMask) delete shape;								
-}
-
 int GraphicThread::MainRotLine(Message*)
 {
 	int ret=0;

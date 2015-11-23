@@ -1,6 +1,3 @@
-// testWMF.cpp : Defines the class behaviors for the application.
-//
-
 #include "stdafx.h"
 #include "testWMF.h"
 #include "testWMFDlg.h"
@@ -102,36 +99,12 @@ BOOL CTestWMFApp::PreTranslateMessage(MSG* pMsg)
 	
 	return CWinApp::PreTranslateMessage(pMsg);
 }
-/*
-void CTestWMFApp::OnUpdate(WPARAM wParam, LPARAM lParam )
-{
-	CTestWMFDlg *dlg1=(CTestWMFDlg *)m_pMainWnd;
 
-	if(Graph->OWnd1.CurPic)
-	{
-		dlg1->angle=Graph->OWnd1.CurPic->CenterRotate.angle; 	
-	}
-	else
-	{
-		dlg1->angle=0;	
-		dlg1->OriginalCheck.EnableWindow(false);		
-	}
-
-	dlg1->bckg=Graph->bckg;
-
-	dlg1->UpdateData(0);
-	//dlg1->FileList1.UpdateList();    	
-}
-*/
 void CTestWMFApp::OnNextPic(WPARAM wParam, LPARAM lParam )
 {
-//	CTestWMFDlg *dlg1=(CTestWMFDlg *)m_pMainWnd;
-//	dlg1->OnCommandNext();	
 }
 void CTestWMFApp::OnPrevPic(WPARAM wParam, LPARAM lParam )
 {
-//	CTestWMFDlg *dlg1=(CTestWMFDlg *)m_pMainWnd;
-//	dlg1->OnCommandPrev();	
 }
 
 

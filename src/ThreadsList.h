@@ -2,7 +2,6 @@
 #include "afxcmn.h"
 #include "MessageInspector.h"
 #include "afxmt.h"
-#include "generic.h"
 #include "resource.h"
 #include "globalheader.h"
 #include "MyListCtrl.h"

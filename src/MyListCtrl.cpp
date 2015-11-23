@@ -1,21 +1,9 @@
-// MyListCtrl.cpp : implementation file
-//
-
 #include "stdafx.h"
 #include "testWMF.h"
 #include "MyListCtrl.h"
 #include "testwmfdlg.h"
-#include ".\mylistctrl.h"
-
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
-#endif
-
-//#include "Windows.h"
-/////////////////////////////////////////////////////////////////////////////
-// MyListCtrl
+#include "mylistctrl.h"
+#include "atlimage.h"
 
 MyListCtrl::MyListCtrl()
 {
@@ -33,12 +21,6 @@ BEGIN_MESSAGE_MAP(MyListCtrl, CListCtrl)
 	ON_WM_DROPFILES()	
 	ON_WM_MOUSEMOVE()
 	ON_WM_CONTEXTMENU()
-//	ON_COMMAND(ID_GETCROPZONE,OnGetCropZone)
-//	ON_COMMAND(ID_CLEARCROPZONE,OnClearCropZone)
-//	ON_COMMAND(ID_GETCROPMAXW,OnGetCropMaxW)
-//	ON_COMMAND(ID_GETCROPMAXH,OnGetCropMaxH)
-//	ON_COMMAND(ID_GETCROPMAXWH,OnGetCropMaxWH)
-//	ON_COMMAND(ID_SAVENAMESLIST,OnSaveNamesList)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -68,23 +50,6 @@ int CALLBACK CompareFunc1(LPARAM lParam1, LPARAM lParam2, LPARAM lParamSort)
 		v1=lParam1; v2=lParam2; ret=Compare(v1,v2,inv); break;
 	case 1:
 		ret=inv*strcmp(Pic1.Name,Pic2.Name); break;
-/*
-	case 2: 
-		v1=Pic1->PicDim.cx; v2=Pic2->PicDim.cx; 
-		ret=Compare(v1,v2,inv); break;
-	case 3: 			
-		v1=Pic1->PicDim.cy; v2=Pic2->PicDim.cy; ret=Compare(v1,v2,inv); break;
-	case 4: 
-		v1=Pic1->GetZones()->GetSize(); v2=Pic2->GetZones()->GetSize(); 
-		ret=Compare(v1,v2,inv); break;
-	case 6: 
-		v1=Pic1->CheckDjvu(); v2=Pic2->CheckDjvu(); 
-		ret=Compare(v1,v2,inv); break;
-	case 8:
-		v1=Pic1->CropZone.Rect.Width(); v2=Pic2->CropZone.Rect.Width(); ret=Compare(v1,v2,inv); break;
-	case 9:
-		v1=Pic1->CropZone.Rect.Height(); v2=Pic2->CropZone.Rect.Height(); ret=Compare(v1,v2,inv); break;
-*/
 	default: ret=0;
 	}
 	return ret;
@@ -102,7 +67,6 @@ void MyListCtrl::UpdateList()
 		DeleteAllItems(); 
 		for(int i=0;i<Pics.GetSize();i++)
 		{
-//			DjvuPic &tt=*(Parent->Pics[i]); 
 			lvi.mask = LVIF_PARAM; lvi.iItem = i;lvi.iSubItem = 0; lvi.lParam=i;			
 			InsertItem(&lvi);
 		}
@@ -114,7 +78,7 @@ void MyListCtrl::UpdateList()
 	
 		lvi.mask = LVIF_TEXT; lvi.iItem = i; lvi.iSubItem=0;
 		T.Format("%d",GetItemData(i)+1); SetItemText(i,lvi.iSubItem++,(char*)LPCTSTR(T));
-		//T=Pic.Name;
+
 		T.Format("%s",Pic.Name+Pic.Ext); 
 		SetItemText(i,lvi.iSubItem++,(char*)LPCTSTR(T));
 			
@@ -156,40 +120,6 @@ int MyListCtrl::HitTest(CPoint point)
 
 void MyListCtrl::OnLButtonDblClk(UINT nFlags, CPoint point) 
 {
-/*
-	OutputWnd &OWnd1=Graph->OWnd1;
-	CArray<DjvuPic*,DjvuPic*> &pics=Parent->Pics;		
-	if(nFlags!=1234) HitItem=HitTest(point);
-
-	if(HitItem>=0)
-	{
-		int t=HitItem,err=0; 
-		CTestWMFDlg* parent=(CTestWMFDlg* )GetParent();
-		parent->UpdateData();
-		
-		DjvuPic *CurPic=pics[GetItemData(t)];
-	
-		CurPic->GBparam.sigma=parent->GBsigma;
-		CurPic->GBparam.KernelSize=parent->GBn;
-		CurPic->CenterRotate.Q=RotateFilterParam::LOW;
-
-		if(CurPic->IsBckgFile)
-		{
-			parent->LoadOriginal=false;
-			parent->OriginalCheck.EnableWindow();	
-		}
-		else
-		{
-			parent->LoadOriginal=true;
-			parent->OriginalCheck.EnableWindow(false);		
-		}
-
-		Graph->PostThreadMessage(UM_LOAD_PIC,(WPARAM)CurPic,0);
-	
-		UpdateList();		
-		parent->OnSaveList();
-	}	
-*/
 }
 
 void MyListCtrl::SetState(int num, int state)
@@ -243,7 +173,7 @@ void MyListCtrl::SelectAll(void)
 	LV_ITEM lvi;
 	for(int i=0;i<GetItemCount();i++)
 	{
-		lvi.mask=LVIF_STATE;// lvi.iSubItem=0; lvi.iItem=i;
+		lvi.mask=LVIF_STATE;
 		lvi.stateMask = LVIS_SELECTED | LVIS_FOCUSED;
 		lvi.state = LVIS_SELECTED | LVIS_FOCUSED;
 		SetItemState(i,&lvi);

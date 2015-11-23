@@ -35,9 +35,6 @@
     <ClCompile Include="src\GraphicThread.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\my_lib\src\MyThread.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\my_lib\src\BMPanvas.cpp">
       <Filter>my_lib</Filter>
     </ClCompile>
@@ -48,6 +45,9 @@
       <Filter>my_lib</Filter>
     </ClCompile>
     <ClCompile Include="..\my_lib\src\MyTime.cpp">
+      <Filter>my_lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\my_lib\src\MyThread.cpp">
       <Filter>my_lib</Filter>
     </ClCompile>
   </ItemGroup>
@@ -67,16 +67,10 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\generic.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\GlobalHeader.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\GraphicThread.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\ijl.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\MyListBox.h">

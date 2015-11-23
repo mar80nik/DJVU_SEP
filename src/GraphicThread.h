@@ -1,6 +1,5 @@
 #pragma once
 #include "mythread.h"
-#include "generic.h"
 
 struct GraphModes 
 {
@@ -34,10 +33,7 @@ class GraphicThread :	public MyThread
 	DECLARE_DYNCREATE(GraphicThread)	
 private:
 	int MainRotLine(Message*);
-	void DrawShape(AbstractGraphics *,BMPanvas* src,double zoom);
-	void EraseShape(AbstractGraphics *,BMPanvas* src,CRect);
 protected:
-	CArray<AbstractGraphics*,AbstractGraphics*> Shapes;
 	CArray<CRect,CRect> Eraser;
 
 	virtual void Main(WPARAM wParam, LPARAM lParam);

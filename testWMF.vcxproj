@@ -199,10 +199,8 @@
     <None Include="res\testWMF.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\generic.h" />
     <ClInclude Include="src\GlobalHeader.h" />
     <ClInclude Include="src\GraphicThread.h" />
-    <ClInclude Include="src\ijl.h" />
     <ClInclude Include="src\MyListBox.h" />
     <ClInclude Include="src\MyListCtrl.h" />
     <ClInclude Include="src\testWMF.h" />
