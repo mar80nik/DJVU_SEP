@@ -36,11 +36,10 @@ int GraphicThread::ExitInstance()
 }
 
 
-int GraphicThread::Main(WPARAM wParam, LPARAM lParam)
+void GraphicThread::Main(WPARAM wParam, LPARAM lParam)
 {
-	int ret=ERR_OK;
-    return ret;
 }
+
 //------------------------------------------------
 void GraphicThread::DrawShape(AbstractGraphics *shape,BMPanvas* dest,double zoom)
 {

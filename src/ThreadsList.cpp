@@ -18,7 +18,7 @@ void GetRandomString(CString &T)
 ThreadParams::ThreadParams(): Terminator(true,true) 
 {
 	Name="NoName"; StopWaiting=true; Parent=0;  PID=-1; Status=Preparing; 
-	Time=TimeLeft=-1;
+	Time=TimeLeft=sec(-1);
 };
 
 CString ThreadParams::GetStatusText()
@@ -39,7 +39,6 @@ CString ThreadParams::GetStatusText()
 
 void ThreadParams::PostParentMessage(UINT Msg, StatMessage* msg)
 {
-	Inspector1.RegisterMsg(msg);
 	msg->ThreadPID=PID; 
 	Parent->PostThreadMessage(Msg,(WPARAM)msg,0);	
 }

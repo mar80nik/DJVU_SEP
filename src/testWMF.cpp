@@ -5,13 +5,11 @@
 #include "testWMF.h"
 #include "testWMFDlg.h"
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
-#endif
-
 GraphicThread *Graph;
+MessagesInspector GlobalInspector;
+MessagesInspector* MessagesInspectorSubject::GlobalInspector=&::GlobalInspector;
+WindowAddress LogMessage::LogWindow;
+WindowAddress MyThread::ConfigParentWindow;
 
 /////////////////////////////////////////////////////////////////////////////
 // CTestWMFApp

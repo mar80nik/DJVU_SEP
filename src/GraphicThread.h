@@ -1,9 +1,11 @@
 #pragma once
-#include "mythread\mythread.h"
+#include "mythread.h"
 #include "generic.h"
 
-enum GraphModes {NONE=0, FRG=1, BCKG=1<<1, BW=1<<2, BLUR=1<<3, ROTLINE=1<<4};
-
+struct GraphModes 
+{
+	enum {NONE=0, FRG=1, BCKG=1<<1, BW=1<<2, BLUR=1<<3, ROTLINE=1<<4};
+};
 
 class Message: public CSingleLock
 {
@@ -38,7 +40,7 @@ protected:
 	CArray<AbstractGraphics*,AbstractGraphics*> Shapes;
 	CArray<CRect,CRect> Eraser;
 
-	virtual int Main(WPARAM wParam, LPARAM lParam);
+	virtual void Main(WPARAM wParam, LPARAM lParam);
 	virtual ~GraphicThread(void);
 	virtual BOOL InitInstance();
 	virtual int ExitInstance();	

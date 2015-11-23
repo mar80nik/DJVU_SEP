@@ -1,18 +1,9 @@
-// testWMFDlg.cpp : implementation file
-//
-
 #include "stdafx.h"
 #include "testWMF.h"
 #include "testWMFDlg.h"
 
-#ifdef _DEBUG
-#define new DEBUG_NEW
-#undef THIS_FILE
-static char THIS_FILE[] = __FILE__;
-#endif
-
-#include "my_timer.h"
-#include ".\testwmfdlg.h"
+#include "MyTime.h"
+#include "testwmfdlg.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CAboutDlg dialog used for App About

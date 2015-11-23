@@ -48,16 +48,16 @@
     <IntDir>$(SolutionDir)temp\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetName>$(ProjectName)-$(Configuration)$(Platform)</TargetName>
-    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)src\);$(SolutionDir);$(SolutionDir)MyThread</IncludePath>
-    <LibraryPath>$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);$(SolutionDir)\lib</LibraryPath>
+    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)src\);$(SolutionDir);$(SolutionDir)..\my_lib\src</IncludePath>
+    <LibraryPath>$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);$(SolutionDir)\lib;$(SolutionDir)\..\my_lib\MyGraphLib\lib\</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)exe\</OutDir>
     <IntDir>$(SolutionDir)temp\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetName>$(ProjectName)-$(Configuration)$(Platform)</TargetName>
-    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)src\);$(SolutionDir);$(SolutionDir)MyThread</IncludePath>
-    <LibraryPath>$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);$(SolutionDir)\lib</LibraryPath>
+    <IncludePath>$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);$(SolutionDir)src\);$(SolutionDir);$(SolutionDir)..\my_lib\src</IncludePath>
+    <LibraryPath>$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSDK_LibraryPath_x86);$(SolutionDir)\lib;$(SolutionDir)\..\my_lib\MyGraphLib\lib\</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -106,6 +106,9 @@
     <Bscmake>
       <OutputFile>$(IntermediateOutputPath)$(TargetName).bsc</OutputFile>
     </Bscmake>
+    <PreBuildEvent>
+      <Command>perl $(SourceDir)Makefile.pl</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -148,8 +151,7 @@
       <HeaderFileName />
     </Midl>
     <PreBuildEvent>
-      <Command>
-      </Command>
+      <Command>perl $(SourceDir)Makefile.pl</Command>
     </PreBuildEvent>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -167,11 +169,12 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MyThread\MyThread.cpp" />
-    <ClCompile Include="MyThread\my_timer.cpp" />
-    <ClCompile Include="src\BMPanvas.cpp" />
+    <ClCompile Include="..\my_lib\src\MyThread.cpp" />
+    <ClCompile Include="..\my_lib\src\MyTime.cpp" />
+    <ClCompile Include="..\my_lib\src\BMPanvas.cpp" />
     <ClCompile Include="src\GraphicThread.cpp" />
-    <ClCompile Include="src\MessageContainers.cpp" />
+    <ClCompile Include="..\my_lib\src\MessageInspector.cpp" />
+    <ClCompile Include="..\my_lib\src\ProtectedObject.cpp" />
     <ClCompile Include="src\MyListBox.cpp" />
     <ClCompile Include="src\MyListCtrl.cpp" />
     <ClCompile Include="src\testWMF.cpp" />
@@ -194,6 +197,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\testWMF.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\generic.h" />
+    <ClInclude Include="src\GlobalHeader.h" />
+    <ClInclude Include="src\GraphicThread.h" />
+    <ClInclude Include="src\ijl.h" />
+    <ClInclude Include="src\MyListBox.h" />
+    <ClInclude Include="src\MyListCtrl.h" />
+    <ClInclude Include="src\testWMF.h" />
+    <ClInclude Include="src\testWMFDlg.h" />
+    <ClInclude Include="src\ThreadsList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

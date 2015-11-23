@@ -29,15 +29,6 @@ struct IndicatorsText {CString device, running, paused;};
 
 void GetErrorText(int err_code,CStringArray &strings);
 
-struct PerfomanceStaff
-{
-	MyTimer Timer1;
-	bool LogEvents;
-	int pass_num;
-
-	PerfomanceStaff() {LogEvents=false;pass_num=0;}	
-};
-
 union FloatInt
 {
 	float flt;
@@ -152,7 +143,6 @@ public:
 	BOOL Unlock() {return WriteProtector.Unlock();};
 };
 
-void CreateBufferTemplate(BMPINFO& INFO);
 
 class LoopArrayElement 
 {	
